@@ -1,0 +1,8 @@
+<div class="wrapper">
+    @for (todo of todos; track $index) {
+        <app-todo-item 
+            class="todo-item"
+            [item]="todo"
+        />
+    }
+</div>
