@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { TodoListService } from "./todo-list.service";
 
 @Component({
     selector: "app-todo-list",
@@ -7,11 +8,12 @@ import { Component } from "@angular/core";
     standalone: false,
 })
 export class TodoListComponent {
-    title = "todo-list";
+    todos: any[] = [];
 
-    todos = [
-        { id: 1, title: "Learn Angular", completed: false },
-        { id: 2, title: "Build a Todo App", completed: true },
-        { id: 3, title: "Test the App", completed: false }
-    ];
+    constructor(
+        private _todoService: TodoListService,
+    ) {
+        this.todos = this._todoService.getTodos();
+    }
+
 }

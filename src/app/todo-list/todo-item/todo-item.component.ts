@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-todo-item',
@@ -8,4 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class TodoItemComponent {
   @Input() item: any;
+
+  isEdited = signal(false);
+
+  toggleEdit() {
+    this.isEdited.set(!this.isEdited());
+  }
 }

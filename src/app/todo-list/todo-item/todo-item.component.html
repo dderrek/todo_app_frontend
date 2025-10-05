@@ -1,3 +1,5 @@
-<div class="wrapper">   
-    {{ item?.title }}
+<div class="wrapper">  
+    <input type="checkbox" [(ngModel)]="item.completed" [disabled]="!isEdited()" />
+    <input type="text" [(ngModel)]="item.title" [disabled]="!isEdited()" />
+    <button (click)="toggleEdit()">{{ isEdited() ? 'Save' : 'Edit' }}</button>
 </div>
