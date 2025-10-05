@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
+import { Todo } from "../types";
 
 @Injectable()
 export class TodoListService {
-    private todos: { id: number; title: string; completed: boolean }[] = [
+    private todos: Todo[] = [
         { id: 1, title: "Learn Angular", completed: true },
         { id: 2, title: "Build a Todo App", completed: false },
         { id: 3, title: "Test the App", completed: false }
     ];
 
-    getTodos() {
+    getTodos(): Todo[] {
         return this.todos;
     }
 
@@ -21,7 +22,7 @@ export class TodoListService {
         this.todos.push(newTodo);
     }
 
-    updateTodo(id: number, updatedFields: Partial<{ title: string; completed: boolean }>) {
+    updateTodo(id: number, updatedFields: Partial<Todo>) {
         const todo = this.todos.find(t => t.id === id);
         if (todo) {
             Object.assign(todo, updatedFields);
