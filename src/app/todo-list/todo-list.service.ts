@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../types";
+import { Observable, of } from "rxjs";
 
 @Injectable()
 export class TodoListService {
@@ -9,8 +10,8 @@ export class TodoListService {
         { id: 3, title: "Test the App", completed: false }
     ];
 
-    getTodos(): Todo[] {
-        return this.todos;
+    getTodos(): Observable<Todo[]> {
+        return of(this.todos);
     }
 
     addTodo(title: string) {
@@ -25,6 +26,7 @@ export class TodoListService {
     updateTodo(id: number, updatedFields: Partial<Todo>) {
         const todo = this.todos.find(t => t.id === id);
         if (todo) {
+            // TODO: maybe refactor
             Object.assign(todo, updatedFields);
         }
     }
