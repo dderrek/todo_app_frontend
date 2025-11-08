@@ -11,6 +11,7 @@ export class TodoListService {
     ];
 
     getTodos(): Observable<Todo[]> {
+        debugger;
         return of(this.todos);
     }
 

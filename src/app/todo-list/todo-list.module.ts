@@ -6,6 +6,8 @@ import { FormsModule } from "@angular/forms";
 import { TodoListService } from "./todo-list.service";
 import { StoreModule } from "@ngrx/store";
 import { todoReducer } from "../ngrx/todo.reducers";
+import { TodoEffects } from "../ngrx/todo.effects";
+import { EffectsModule } from "@ngrx/effects";
 
 @NgModule({
     declarations: [
@@ -16,7 +18,8 @@ import { todoReducer } from "../ngrx/todo.reducers";
         CommonModule,
         FormsModule,
         AsyncPipe,
-        StoreModule.forRoot({ todos: todoReducer }),
+        StoreModule.forFeature('todos', todoReducer),
+        EffectsModule.forFeature([ TodoEffects ]),
     ],
     providers: [
         TodoListService,
