@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Todo } from "../types";
 import { Store } from "@ngrx/store";
 import { loadTodos } from "../ngrx/todo.actions";
-import { Observable, of } from "rxjs";
+import { Observable, of, tap } from "rxjs";
 import { selectTodos } from "../ngrx/todo.selectors";
 
 @Component({
@@ -18,6 +18,8 @@ export class TodoListComponent {
         private _store: Store<{ todos: Todo[] }>,
     ) {
         this.todos$ = this._store.select(selectTodos);
+
+        this.todos$.subscribe(value => console.debug('the value inside cmp ', value));
     }
 
     ngOnInit() {

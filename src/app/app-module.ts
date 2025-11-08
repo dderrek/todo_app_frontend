@@ -16,7 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     TodoListModule,
     StoreModule.forRoot({}),
-    EffectsModule.forRoot({}),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

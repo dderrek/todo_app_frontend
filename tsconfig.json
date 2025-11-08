@@ -13,7 +13,9 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    // this flag is needed to fix the this._actions$ is undefined error in the effects clas
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
