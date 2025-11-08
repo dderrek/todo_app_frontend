@@ -1,5 +1,5 @@
 <div class="wrapper">
-    @for (todo of todos; track $index) {
+    @for (todo of todos$ | async; track $index) {
         <app-todo-item 
             class="todo-item"
             [item]="todo"

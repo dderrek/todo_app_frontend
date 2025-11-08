@@ -9,7 +9,7 @@ export class TodoEffects  {
 
     constructor(private _actions$: Actions, private _todosService: TodoListService) {}
 
-    loadTodos = createEffect(() => 
+    loadTodos$ = createEffect(() => 
         this._actions$.pipe(
             ofType(loadTodos),
             mergeMap(() => 

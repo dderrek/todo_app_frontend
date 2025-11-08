@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
-import { TodoListService } from "./todo-list.service";
 import { Todo } from "../types";
 import { Store } from "@ngrx/store";
 import { loadTodos } from "../ngrx/todo.actions";
+import { Observable, of } from "rxjs";
+import { selectTodos } from "../ngrx/todo.selectors";
 
 @Component({
     selector: "app-todo-list",
@@ -11,17 +12,12 @@ import { loadTodos } from "../ngrx/todo.actions";
     standalone: false,
 })
 export class TodoListComponent {
-    todos: Todo[] = [];
+    todos$: Observable<Todo[]> = of([]);
 
     constructor(
-        private _todoService: TodoListService,
-        private _store: Store<{ todo: Todo[] }>,
+        private _store: Store<{ todos: Todo[] }>,
     ) {
-        this.todos = this._todoService.getTodos();
-        let todosFromStore = this._store.select(state => state.todo);
-        todosFromStore.subscribe(todos => {
-            console.debug('the todos from store are', todos);
-        });
+        this.todos$ = this._store.select(selectTodos);
     }
 
     ngOnInit() {

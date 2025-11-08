@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { TodoListComponent } from "./todo-list.component";
-import { CommonModule } from "@angular/common";
+import { AsyncPipe, CommonModule } from "@angular/common";
 import { TodoItemComponent } from "./todo-item/todo-item.component";
 import { FormsModule } from "@angular/forms";
 import { TodoListService } from "./todo-list.service";
@@ -15,7 +15,8 @@ import { todoReducer } from "../ngrx/todo.reducers";
     imports: [
         CommonModule,
         FormsModule,
-        StoreModule.forRoot({ todo: todoReducer }),
+        AsyncPipe,
+        StoreModule.forRoot({ todos: todoReducer }),
     ],
     providers: [
         TodoListService,
