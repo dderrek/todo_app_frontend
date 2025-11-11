@@ -1,5 +1,6 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { Todo } from '../../types';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-item',
@@ -8,11 +9,17 @@ import { Todo } from '../../types';
   standalone: false,
 })
 export class TodoItemComponent {
-  @Input() item: Todo = { id: 0, title: '', completed: false };
+  public formGroup!: FormGroup;
 
-  isEdited = signal(false);
+  @Input() set item(value: Todo) {
+    this.formGroup = new FormGroup({
+      title: new FormControl(value.title),
+      completed: new FormControl(value.completed),
+    });
+  }
+  @Output() onChange: EventEmitter<Todo> = new EventEmitter();
 
-  toggleEdit() {
-    this.isEdited.set(!this.isEdited());
+  change(): void {
+    this.onChange.emit(this.formGroup.value);
   }
 }

@@ -1,5 +1,12 @@
-<div class="wrapper">  
-    <input type="checkbox" [(ngModel)]="item.completed" [disabled]="!isEdited()" />
-    <input type="text" [(ngModel)]="item.title" [disabled]="!isEdited()" />
-    <button (click)="toggleEdit()">{{ isEdited() ? 'Save' : 'Edit' }}</button>
+<div class="wrapper">
+    <form [formGroup]="formGroup">
+        <input type="checkbox"
+            formControlName="completed"
+            (blur)="change()"
+        />
+        <input type="text"
+            formControlName="title"
+            (blur)="change()"
+        />
+    </form>  
 </div>

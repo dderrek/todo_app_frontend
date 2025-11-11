@@ -18,12 +18,14 @@ export class TodoListComponent {
         private _store: Store<{ todos: Todo[] }>,
     ) {
         this.todos$ = this._store.select(selectTodos);
-
-        this.todos$.subscribe(value => console.debug('the value inside cmp ', value));
     }
 
     ngOnInit() {
         this._store.dispatch(loadTodos());
+    }
+
+    updateTodo(todo: Todo) {
+        
     }
 
 }

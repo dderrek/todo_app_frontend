@@ -3,6 +3,7 @@
         <app-todo-item 
             class="todo-item"
             [item]="todo"
+            (onChange)="updateTodo($event)"
         />
     }
 </div>
