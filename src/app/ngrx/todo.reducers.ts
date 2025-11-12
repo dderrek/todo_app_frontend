@@ -1,5 +1,5 @@
 import { createReducer, on, State } from "@ngrx/store"
-import { loadTodos, loadTodosSucceeded } from "./todo.actions"
+import { todoActions } from "./todo.actions"
 import { Todo } from "../types";
 
 export interface TodoState {
@@ -12,6 +12,6 @@ export const initialState: TodoState = {
 
 export const todoReducer = createReducer(
     initialState,
-    on(loadTodos, state => state),
-    on(loadTodosSucceeded, (state, { todos }) => ({ ...state, todos })),
+    on(todoActions.loadTodos, state => state),
+    on(todoActions.loadTodosSucceeded, (state, { todos }) => ({ ...state, todos })),
 );

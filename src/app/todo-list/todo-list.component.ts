@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Todo } from "../types";
 import { Store } from "@ngrx/store";
-import { loadTodos } from "../ngrx/todo.actions";
+import { todoActions } from "../ngrx/todo.actions";
 import { Observable, of, tap } from "rxjs";
 import { selectTodos } from "../ngrx/todo.selectors";
 
@@ -21,7 +21,7 @@ export class TodoListComponent {
     }
 
     ngOnInit() {
-        this._store.dispatch(loadTodos());
+        this._store.dispatch(todoActions.loadTodos());
     }
 
     updateTodo(todo: Todo) {
