@@ -15,9 +15,21 @@ export class TodoEffects  {
             mergeMap(() => 
                 this._todosService.getTodos().pipe(
                     map(res => todoActions.loadTodosSucceeded({ todos: res })),
-                    catchError(error => of(todoActions.loadTodosFailed( { error: error })))
+                    catchError(error => of(todoActions.loadTodosFailed( { error })))
                 ),
             )      
+        )
+    );
+
+    updateTodo = createEffect(() => 
+        this._actions$.pipe(
+            ofType(todoActions.updateTodo),
+            mergeMap(
+                (todo) => this._todosService.updateTodo(todo.todo).pipe(
+                    map(_ => todoActions.updateTodoSucceeded()),
+                    catchError(error => of(todoActions.updateTodoFailed({ error}))),
+                )
+            )
         )
     );
 }

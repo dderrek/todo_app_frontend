@@ -23,15 +23,18 @@ export class TodoListService {
         this.todos.push(newTodo);
     }
 
-    updateTodo(id: number, updatedFields: Partial<Todo>) {
-        const todo = this.todos.find(t => t.id === id);
-        if (todo) {
-            // TODO: maybe refactor
-            Object.assign(todo, updatedFields);
+    updateTodo(updateTodo: Todo): Observable<boolean> {
+        const index = this.todos.findIndex(t => t.id === updateTodo.id);
+        // TODO: -1 check
+        if (!index) {
+            throw new Error('todo not found');
         }
+
+        this.todos[index] = updateTodo;
+        return of(true);
     }
 
-    deleteTodo(id: number) {
+    deleteTodo(id: number): void {
         this.todos = this.todos.filter(t => t.id !== id);
     }
 }

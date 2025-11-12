@@ -13,6 +13,7 @@ export class TodoItemComponent {
 
   @Input() set item(value: Todo) {
     this.formGroup = new FormGroup({
+      id: new FormControl({ value: value.id, disabled: true }),
       title: new FormControl(value.title),
       completed: new FormControl(value.completed),
     });
@@ -20,6 +21,7 @@ export class TodoItemComponent {
   @Output() onChange: EventEmitter<Todo> = new EventEmitter();
 
   change(): void {
-    this.onChange.emit(this.formGroup.value);
+    debugger;
+    this.onChange.emit(this.formGroup.getRawValue());
   }
 }

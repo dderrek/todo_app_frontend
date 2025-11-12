@@ -25,7 +25,8 @@ export class TodoListComponent {
     }
 
     updateTodo(todo: Todo) {
-        
+        debugger;
+        this._store.dispatch(todoActions.updateTodo({ todo }));
     }
 
 }
