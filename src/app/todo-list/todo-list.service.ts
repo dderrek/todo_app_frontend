@@ -11,7 +11,7 @@ export class TodoListService {
     ];
 
     getTodos(): Observable<Todo[]> {
-        return of(this.todos);
+        return of([...this.todos]);
     }
 
     addTodo(title: string) {
@@ -25,12 +25,12 @@ export class TodoListService {
 
     updateTodo(updateTodo: Todo): Observable<boolean> {
         const index = this.todos.findIndex(t => t.id === updateTodo.id);
-        // TODO: -1 check
-        if (!index) {
+        if (index === -1) {
             throw new Error('todo not found');
         }
 
         this.todos[index] = updateTodo;
+        
         return of(true);
     }
 

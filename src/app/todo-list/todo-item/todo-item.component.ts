@@ -21,7 +21,6 @@ export class TodoItemComponent {
   @Output() onChange: EventEmitter<Todo> = new EventEmitter();
 
   change(): void {
-    debugger;
     this.onChange.emit(this.formGroup.getRawValue());
   }
 }
