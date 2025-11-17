@@ -1,6 +1,12 @@
 import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { Todo } from '../../types';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+
+interface TodoForm {
+  id: AbstractControl<number|null>;
+  title: AbstractControl<string|null>;
+  completed: AbstractControl<boolean|null>;
+}
 
 @Component({
   selector: 'app-todo-item',
@@ -9,8 +15,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   standalone: false,
 })
 export class TodoItemComponent {
-  public formGroup!: FormGroup;
-
+  public formGroup!: FormGroup<TodoForm>;
+  
   @Input() set item(value: Todo) {
     this.formGroup = new FormGroup({
       id: new FormControl({ value: value.id, disabled: true }),
@@ -19,8 +25,13 @@ export class TodoItemComponent {
     });
   }
   @Output() onChange: EventEmitter<Todo> = new EventEmitter();
+  @Output() onDelete: EventEmitter<number> = new EventEmitter();
 
   change(): void {
     this.onChange.emit(this.formGroup.getRawValue());
+  }
+
+  delete(): void {
+    this.onDelete.emit(this.formGroup.controls['id'].value);
   }
 }
