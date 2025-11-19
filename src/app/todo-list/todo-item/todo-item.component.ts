@@ -18,7 +18,7 @@ export class TodoItemComponent {
   public formGroup!: FormGroup<TodoForm>;
   
   @Input() set item(value: Todo) {
-    this.formGroup = new FormGroup({
+    this.formGroup = new FormGroup<TodoForm>({
       id: new FormControl({ value: value.id, disabled: true }),
       title: new FormControl(value.title),
       completed: new FormControl(value.completed),
@@ -32,6 +32,10 @@ export class TodoItemComponent {
   }
 
   delete(): void {
-    this.onDelete.emit(this.formGroup.controls['id'].value);
+    const id = this.formGroup.controls.id.value;
+    if (!id) {
+      return;
+    }
+    this.onDelete.emit(id);
   }
 }
