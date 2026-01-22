@@ -28,4 +28,7 @@ export class TodoListComponent {
         this._store.dispatch(todoActions.updateTodo({ todo }));
     }
 
+    deleteTodo(id: number) {
+        this._store.dispatch(todoActions.deleteTodo({ id }));
+    }
 }

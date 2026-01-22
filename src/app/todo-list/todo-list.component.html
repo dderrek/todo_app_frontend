@@ -4,6 +4,7 @@
             class="todo-item"
             [item]="todo"
             (onChange)="updateTodo($event)"
+            (onDelete)="deleteTodo($event)"
         />
     }
 </div>

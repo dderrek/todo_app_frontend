@@ -34,7 +34,9 @@ export class TodoListService {
         return of(true);
     }
 
-    deleteTodo(id: number): void {
+    deleteTodo(id: number): Observable<boolean> {
         this.todos = this.todos.filter(t => t.id !== id);
+
+        return of(true);
     }
 }
