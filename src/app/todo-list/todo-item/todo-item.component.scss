@@ -1,9 +1,29 @@
-
 .wrapper {
     height: 100px;
-    margin: 0 auto;
 
-    input {
-        margin-right: 10px;
+    form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        input {
+            margin-right: 10px;
+        }
+
+        input[type=checkbox] {
+            align-self: center;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            // TODO: has no effect
+            border-radius: 4px;
+        }
+
+        input[type=text] {
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid black;
+            font-size: 1rem;
+        }
     }
 }
