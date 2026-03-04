@@ -6,6 +6,7 @@ import { App } from './app';
 import { TodoListModule } from './todo-list/todo-list.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,11 +18,12 @@ import { EffectsModule } from '@ngrx/effects';
     TodoListModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    FontAwesomeModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
   ],
   bootstrap: [App],
-  exports: [],
+  exports: [FontAwesomeModule],
 })
 export class AppModule { }

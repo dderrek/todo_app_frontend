@@ -44,5 +44,17 @@ export class TodoEffects  {
             )
         )
     );
+
+    addTodo = createEffect(() => 
+        this._actions$.pipe(
+            ofType(todoActions.addTodo),
+            mergeMap(action => 
+                this._todosService.addTodo().pipe(
+                   map(res => res),
+                    catchError(error => of(error)),
+                ) 
+            ),
+        )
+    )
 }
 

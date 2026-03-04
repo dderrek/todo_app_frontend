@@ -13,5 +13,6 @@ export const todoActions = createActionGroup({
         deleteTodo: props<{ id: number }>(),
         deleteTodoSuceeded: emptyProps(),
         deleteTodoFailed: props<{ error: any }>(),
+        addTodo: emptyProps(),
     }
 });
