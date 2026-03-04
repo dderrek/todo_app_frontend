@@ -1,42 +1,71 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../types";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
+
+const todoLocalStorageKey = 'todos';
 
 @Injectable()
 export class TodoListService {
-    private todos: Todo[] = [
-        { id: 1, title: "Learn Angular", completed: true },
-        { id: 2, title: "Build a Todo App", completed: false },
-        { id: 3, title: "Test the App", completed: false }
-    ];
+
+    private todos: Todo[] = [];
+
+    constructor() {
+        this.todos = this.getTodosFromLocalStorage();
+    }
 
     getTodos(): Observable<Todo[]> {
         return of([...this.todos]);
     }
 
-    addTodo(title: string) {
+    addTodo(): Observable<boolean> {
         const newTodo = {
-            id: this.todos.length + 1,
-            title,
+            id: Math.floor(Math.random() * 1000),
+            title: '',
             completed: false,
         };
         this.todos.push(newTodo);
+
+        this.writeTodosToLocalStorage();
+
+        return of(true);
     }
 
     updateTodo(updateTodo: Todo): Observable<boolean> {
         const index = this.todos.findIndex(t => t.id === updateTodo.id);
         if (index === -1) {
-            throw new Error('todo not found');
+            return throwError(() => new Error('todo not found'));
         }
 
         this.todos[index] = updateTodo;
+        this.writeTodosToLocalStorage();
         
         return of(true);
     }
 
     deleteTodo(id: number): Observable<boolean> {
         this.todos = this.todos.filter(t => t.id !== id);
+        this.writeTodosToLocalStorage();
 
         return of(true);
+    }
+
+    private getTodosFromLocalStorage(): Todo[] {
+        let todos: Todo[] = [];
+
+        const todosJson = localStorage.getItem(todoLocalStorageKey);
+        if (todosJson) {
+            todos = JSON.parse(todosJson);
+        }
+
+        return todos;
+    }
+
+    private writeTodosToLocalStorage(): void {
+        if (!this.todos.length) {
+            return;
+        }
+
+        const todosAsJson = JSON.stringify(this.todos);
+        localStorage.setItem(todoLocalStorageKey, todosAsJson);
     }
 }
